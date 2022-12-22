@@ -1,7 +1,7 @@
 import socket, threading  # импорт библиотек
 
 host = '127.0.0.1'  # локальный хост компьютера
-port = 2327  # выбор незарезервированного порта
+port = 8081 # выбор незарезервированного порта
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # инициализация сокета
 server.bind((host, port))  # назначение хоста и порта к сокету
@@ -13,7 +13,7 @@ nicknames = []
 
 def broadcast(message):  #функция связи
     for client in clients:
-        clients.send(message)
+        client.send(message)
 
 
 def handle(client):
@@ -34,7 +34,7 @@ def receive():  # подключение нескольких пользоват
     while True:
         client, address = server.accept()
         print("Соеденен с {}".format(str(address)))
-        client.sent('NICKNAME'.encode(utf-8))
+        client.send('NICKNAME'.encode('utf-8'))
         nickname = client.recv(1024).decode('utf-8')
         nicknames.append(nickname)
         clients.append(client)
